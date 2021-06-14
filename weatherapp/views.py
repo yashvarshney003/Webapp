@@ -2,7 +2,10 @@ from django.shortcuts import render
 import urllib.request
 import json
 # Create your views here.
+number_of_request = 0 
 def index(request):
+	global number_of_request
+	number_of_request+=1 
 	if(request.method == 'POST'):
 		city =  request.POST['city']
 		try:
@@ -15,6 +18,8 @@ def index(request):
 				del data["error_code"]
 
 			data = {
+				"number_of_request": str(number_of_request),
+				"city": str(city),
 				"country_code": str(list_of_data['sys']['country']),
 				"coordinate": str(list_of_data['coord']['lon']) + ', '
 				+ str(list_of_data['coord']['lat']),
@@ -29,6 +34,7 @@ def index(request):
 			print(data)
 		except: 
 			data = {}
+			data["number_of_request"] =  str(number_of_request)
 			data["error_code"] =  "City not found"
 			 
 	else:
