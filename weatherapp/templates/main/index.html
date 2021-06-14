@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Django Weather App</title>
+	<style>
+		* {
+			margin: 0;
+			box-sizing: border-box;
+			font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+		}
+
+		#main {
+			text-align: center;
+			padding-top: 100px;
+		}
+
+		h1 {
+			margin-bottom: 20px;
+		}
+
+		input[type='text'] {
+			width: 30%;
+			margin-bottom: 10px;
+			padding: 10px;
+			border: 2px solid black;
+		}
+
+		input[type='submit'] {
+			width: 30%;
+			padding: 5px;
+			background: black;
+			color: white;
+			text-transform: uppercase;
+		}
+
+		form {
+			margin-bottom: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+		<div class="container">
+			<a href="../" class="navbar-brand">Weather App <span style="color: rgb(39, 117, 161);"> <strong> - Django
+						Framework</strong>
+				</span> </a>
+			<a href="https://openweathermap.org" class="navbar-tech">OpenWeather - Get Your API</a>
+		</div>
+	</div>
+
+	<br /><br /> <br>
+	<div id="jumbotron" class="jumbotron" style="text-align: center; margin-top:-50px">
+		<h1 class="display-5">Weather Desktop App </h1>
+		<h5>Using Python Language and Django Framework</h5>
+
+		
+	</div>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<form method="post" class="col-md"">
+      {% csrf_token %}
+      <div class=" input-group">
+
+			<input type="text" class="form-control" name="city" placeholder="Choose Your City ...">
+			<div class="input-group-btn">
+				<button type="submit" class="btn btn-primary">Search</button>
+			</div>
+			</div>
+			<form>
+	</nav>
+	<br> <br>
+	<div class="row">
+		{% if country_code and coordinate and temp and pressure and humidity %}
+		<div class="col d-flex justify-content-center" ">
+      <div class=" card text-white bg-light mb-6">
+			<div class=" card-body">
+				<h4><span class="badge badge-primary">Country Code :</span> {{country_code}}</h4>
+				<h4><span class="badge badge-primary">Coordinates [X,Y] :</span> {{coordinate}}</h4>
+				<h4><span class="badge badge-primary">Temperature in Celsius :</span> {{temp}}</h4>
+				<h4><span class="badge badge-primary">Pressure :</span> {{pressure}} </h4>
+				<h4><span class="badge badge-primary">Humidity : </span> {{humidity}}</h4>
+				<h4><span class="badge badge-primary">Forecast : </span> {{main}} <img
+						src="http://openweathermap.org/img/w/{{icon}}.png" alt="Image" style="width:70px"></h4>
+				<h4><span class="badge badge-primary">Description : </span> {{description}}</h4>
+			</div>
+			{% endif %}
+			{% if error_code  %}
+			   <h1> City not found</h1>
+			 {% endif %}
+		</div>
+</body>
+
+</body>
+
+</html>
