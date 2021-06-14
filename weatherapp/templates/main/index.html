@@ -8,10 +8,18 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Django Weather App</title>
 	<style>
+		body {
+  background-color: lightblue;
+}
 		* {
 			margin: 0;
 			box-sizing: border-box;
 			font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+		}
+		.number_of_user {
+			position: fixed;
+bottom : 6px;
+left: 6px;
 		}
 
 		#main {
@@ -45,23 +53,15 @@
 </head>
 
 <body>
-	<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-		<div class="container">
-			<a href="../" class="navbar-brand">Weather App <span style="color: rgb(39, 117, 161);"> <strong> - Django
-						Framework</strong>
-				</span> </a>
-			<a href="https://openweathermap.org" class="navbar-tech">OpenWeather - Get Your API</a>
-		</div>
-	</div>
-
+	
 	<br /><br /> <br>
 	<div id="jumbotron" class="jumbotron" style="text-align: center; margin-top:-50px">
-		<h1 class="display-5">Weather Desktop App </h1>
-		<h5>Using Python Language and Django Framework</h5>
-
+		<h1 class="display-5">Weather Django App </h1>
 		
-	</div>
 
+
+	</div>
+<center>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<form method="post" class="col-md"">
       {% csrf_token %}
@@ -75,11 +75,15 @@
 			<form>
 	</nav>
 	<br> <br>
+	<div class= "number_of_user">
+		<h4><span class="badge badge-primary">Number of request:</span> {{number_of_request}}</h4>
+	</div>
 	<div class="row">
 		{% if country_code and coordinate and temp and pressure and humidity %}
 		<div class="col d-flex justify-content-center" ">
       <div class=" card text-white bg-light mb-6">
-			<div class=" card-body">
+			<div class=" card-body" style="center">
+				<h4><span class="badge badge-primary">City :</span> {{city}}</h4>
 				<h4><span class="badge badge-primary">Country Code :</span> {{country_code}}</h4>
 				<h4><span class="badge badge-primary">Coordinates [X,Y] :</span> {{coordinate}}</h4>
 				<h4><span class="badge badge-primary">Temperature in Celsius :</span> {{temp}}</h4>
@@ -90,10 +94,11 @@
 				<h4><span class="badge badge-primary">Description : </span> {{description}}</h4>
 			</div>
 			{% endif %}
-			{% if error_code  %}
-			   <h1> City not found</h1>
-			 {% endif %}
+			{% if error_code %}
+			<h1> City not found</h1>
+			{% endif %}
 		</div>
+		</center>
 </body>
 
 </body>
